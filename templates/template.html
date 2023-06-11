@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Movie Recommender Sytem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/movie.ico')}}">
+</head>
+<body background="{{ url_for('static', filename='images/bgImg.jpg') }}">
+    <div class="header">
+        Movie Recommender System
+    </div>
+
+    <div class="maincontent">
+        <h4 class="movies-category">Movies For You</h4>
+        <form action="/" method="post">
+            <div class="select box">
+                <select name="movieName" id="format">
+                   <option selected disabled>{{ choice }}</option>
+                   {% for movie in movies %}
+                   <option value="{{ movie }}">{{ movie }}</option>
+                   {% endfor %}
+                </select>
+            </div>
+            <div class="button box">
+                <button class="btn" type="submit">Suggest</button>
+            </div>
+        </form>
+        <br><br>
+        <h4 class="movies-category" style="font-size: 30px;">Suggetions</h4>
+        <section class="movies">
+            {% if sugg is none%}
+                <div style="margin-left: 130px; font-size: 20px;">No Input Yet!</div>
+            {% else %}
+                <button class="pre-btn"><img src="{{ url_for('static', filename='images/arrow.png')}}" alt=""></button>
+                <button class="nxt-btn"><img src="{{ url_for('static', filename='images/arrow.png')}}" alt=""></button>
+                <div class="movies-container">
+
+                {% for index, row in sugg.iterrows() %}
+                    <div class="movies-card">
+                        <div class="movies-image">
+                            <img src="{{ row['posters'] }}" class="movies-thumb" alt=" {{ row['title'] }} image not found" height="100%" width="100%">
+                        </div>
+                        <div class="movies-info">
+                            <p>{{ row['release_date'] }}</p>
+                            <p>Directed by - <span style="color: darkred">{{ row['director'] }}</span></p> 
+                            <img src="{{ url_for('static', filename='images/star.png') }}" alt="Star" width="20" height="20">
+                            <div class="star">{{ row['vote_average'] }}</div>
+                            <img style="margin-left: 10px;" src="{{ url_for('static', filename='images/likes.png') }}" alt="Star" width="20" height="20">
+                            <div class="star">{{ row['vote_count'] }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="movies"> 
+            <h4 class="movies-category">Popular Items</h4>
+            <button class="pre-btn"><img src="{{ url_for('static', filename='images/arrow.png')}}" alt=""></button>
+            <button class="nxt-btn"><img src="{{ url_for('static', filename='images/arrow.png')}}" alt=""></button>
+            <div class="movies-container">
+
+                {% for index, row in pop.iterrows() %}
+                <div class="movies-card">
+                    <div class="movies-image">
+                        <img src="{{ row['posters'] }}" class="movies-thumb" alt=" {{ row['title'] }} image not found! " height="100%" width="100%">
+                    </div>
+                    <div class="movies-info">
+                        <p>{{ row['release_date'] }}</p>
+                        <p>Directed by - <span style="color: darkred">{{ row['director'] }}</span></p>
+                        <img src="{{ url_for('static', filename='images/star.png') }}" alt="Star" width="20" height="20">
+                        <div class="star">{{ row['vote_average'] }}</div>
+                        <img style="margin-left: 10px;" src="{{ url_for('static', filename='images/likes.png') }}" alt="Star" width="20" height="20">
+                        <div class="star">{{ row['vote_count'] }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
