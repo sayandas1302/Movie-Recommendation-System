@@ -21,7 +21,8 @@ To install the dependencies, follow these steps:
 4. Install all the dependencies mentioned in the "requirements.txt" file.
 
 ### Running the app: 
-After ensuring that all dependencies are installed, follow these steps to run the web app
+After ensuring that all dependencies are installed, First open the "dataset" folder, theres 3 .rar file that stores the similarity matrix. Extract the similarity matrix from the 3 .rar files and follow these steps to run the web app
+
 1. Open the command line and activate the virtual environment.
 2. Run the "webapp.py" file, which will display a link in the command line.
 3. Paste the provided link into your browser and press enter to start the app.
